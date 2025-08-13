@@ -7,6 +7,10 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   position: sticky;
   top: 90px; /* 헤더 높이에 맞게 조정 */
+
+  margin-left: -70px;
+
+  margin-top: 185px;
 }
 
 .side-profile__title {
