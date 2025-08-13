@@ -121,7 +121,7 @@ const MainPage = ({ ingredientsInput, setIngredientsInput, servingSize, setServi
         ) : (
 
           <div>
-            <h3 style={{marginBottom: 10, color: '#ff8c00', fontWeight: 'bold'}}>쿡이의 추천 키워드</h3>
+            {/* <h3 style={{marginBottom: 10, color: '#ff8c00', fontWeight: 'bold'}}>쿡이의 추천 키워드</h3> */}
             <div className="keyword-tags">
               {categories.map((category) => (
                 <button
