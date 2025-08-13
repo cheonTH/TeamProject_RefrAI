@@ -1,0 +1,1170 @@
+/* 게시판 */
+.board-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 30px;
+    /* background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid #FF8C00; */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    text-align: center;
+}
+
+/* .main-section-header {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eeeeee;
+  padding-bottom: 10px;
+}
+
+.main-section-header .tabs {
+  display: flex;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.main-section-header .tab-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  cursor: pointer;
+  color: #777;
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+.main-section-header .tab-button.active {
+  color: #FF8C00;
+  font-weight: bold;
+  border-bottom-color: #FF8C00;
+}
+
+.main-section-header .tab-button:hover {
+  color: #FF8C00;
+} */
+
+.board-titles {
+    text-align: left;
+    font-size: 40px;
+    color: #ffc06d;
+    margin-bottom: 20px;
+}
+
+.board-button {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.board-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.board-button-right {
+    margin-left: auto;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background-color: #ffc06d;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.board-button-right:hover{
+  background-color: #e6a94e;
+}
+
+.board-container button:hover{
+  /* background-color: #e6a94e; */
+  
+}
+
+.board-search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.board-input {
+    width: 60%;
+    height: 45px;
+    padding: 10px;
+    border: solid #ccc 1px;
+    border-radius: 10px;
+}
+
+.board-search-container button {
+  margin-left: 15px;
+  padding: 10px;
+  font-size: 15px;
+  color: white;
+  background-color: #ffc06d;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.board-search-container button:hover{
+  background-color: #e6a94e;
+}
+
+board-post-item a {
+  text-decoration: none;
+  color: #282c34; 
+}
+
+.board-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+  
+.board-pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #ccc;
+    cursor: pointer;
+    font-size: 14px;
+}
+  
+.board-pagination button.selected {
+    background-color: #ffc06d;
+    color: #fff;
+    border-color: #ffc06d;
+}
+ 
+.board-items a {
+    text-decoration: none;
+}
+
+.board-items {
+  display: flex;
+  grid-template-columns: repeat(3, 1fr); /* 한 줄에 3개 */
+  gap: 12px;
+  margin-top: 20px;
+  justify-content: center;
+  margin-left: 40px;
+}
+
+.card-view {
+  display: grid;
+  gap: 12px;
+}
+
+/* ---------------------------------------------------- */
+/* 추천 레시피 카드 섹션 (기존 및 개인 맞춤 추천 모두 사용) */
+/* ---------------------------------------------------- */
+.recipe-cards-section {
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.recipe-cards-section .cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.recipe-cards-section h2 {
+    color: #ff8c00;
+    font-size: 1.8em;
+    margin: 0;
+    text-align: left; /* 왼쪽 정렬 */
+    flex-grow: 1; /* 공간을 채우도록 */
+}
+
+.recipe-cards-section .sort-options {
+    display: flex;
+    gap: 10px; /* 탭 버튼 간 간격 */
+    flex-wrap: wrap;
+    justify-content: flex-end; /* 오른쪽 정렬 */
+}
+
+.recipe-cards-section .sort-button {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    color: #555;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    min-width: 120px; /* 탭 버튼 최소 너비 */
+}
+
+.recipe-cards-section .sort-button:hover {
+    background-color: #e0e0e0;
+}
+
+.recipe-cards-section .sort-button.active {
+    background-color: #ffc06d; /* 활성 탭 색상 */
+    color: white;
+    border-color: #ffc06d;
+    font-weight: bold;
+}
+
+.recipe-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 반응형 그리드 */
+    gap: 25px; /* 카드 간 간격 */
+    padding-top: 20px; /* 탭 버튼 아래 간격 */
+}
+
+.recipe-card-board {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.recipe-card.clickable { /* 클릭 가능한 카드에 마우스 오버 효과 추가 */
+    cursor: pointer;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: left;
+    flex-grow: 1; /* 내용이 카드 크기에 맞게 채워지도록 */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85em;
+    color: #888;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    margin-top: auto; /* 항상 하단에 위치하도록 */
+}
+
+.list-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.board-item-link {
+  display: block;
+  width: 100%;
+}
+
+.board-category-buttons{
+  margin-top: 10px;
+}
+
+.board-category-buttons button{
+  padding: 10px;
+  font-size: 15px;
+  border: none;
+  border-radius: 30px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.category-select {
+  padding: 8px 16px;
+  font-size: 15px;
+  border-radius: 30px;        /* pill-shaped (글쓰기 버튼처럼 둥글게) */
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  height: 38px;               /* 글쓰기 버튼과 동일한 높이 추정 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 버튼처럼 약간의 그림자 */
+  margin-right: auto; 
+  margin-top: 10px;
+}
+
+.non-active-button:hover{
+  background-color: #e0e0e0;
+}
+
+.non-active-button.active-button{
+  background-color: #ffc06d;
+  color: white;
+  border-color: #ffc06d;
+  font-weight: bold;
+}
+
+.non-active-button{
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+/* 글쓰기 */
+.write-form {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 30px;
+  /* background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-top: 5px solid #FF8C00; */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.write-form input[type="text"],
+.write-form textarea {
+  width: 90%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.write-form textarea {
+  height: 120px;
+}
+
+.write-form input[type="file"] {
+  font-size: 14px;
+}
+
+.image-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.write-form button {
+  padding: 10px;
+  font-size: 15px;
+  background-color: #ffc06d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-container {
+  margin-bottom: 10px;
+}
+
+.image-preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.qustion-content img{
+  margin-left: 60px;
+}
+
+.remove-image-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.thumbnail-image {
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+.thumbnail-image p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.preview-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* 제목 스타일 (왼쪽 정렬) */
+.recipe-info-title {
+  text-align: left;
+  margin-top: 30px;
+  font-size: 1.3rem;
+  margin-left: 60px;
+  font-weight: bold;
+}
+
+/* 파일 업로드 input 왼쪽 정렬 */
+.recipe-text-file {
+  margin-top: 5px;
+  align-self: flex-start;
+  display: block;
+}
+
+.step-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 자식들(버튼 등)을 왼쪽 정렬 */
+  margin-left: 60px;
+}
+
+.step-input textarea{
+  width: 95%;
+}
+
+.recipe-file-delete {
+  margin-top: 5px;
+  background-color: #ffcd9b;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start; /* 삭제 버튼을 왼쪽 정렬 */
+}
+
+/* 설명 추가 버튼 */
+.add-step-button {
+  background-color: #ffc06d;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-right: 730px;
+}
+
+
+
+.write-options-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 반응형 대응 */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 70px;
+}
+
+.write-options {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.write-options label {
+  margin-right: 10px;
+}
+
+.cooking-time-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.styled-input {
+  width: 80px;
+  padding: 5px;
+}
+
+/* 난이도 영역 왼쪽 정렬 */
+.difficulty-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 라디오 버튼과 텍스트 붙이기 */
+.difficulty-section label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 요리 시간 인풋 오른쪽 끝 정렬 */
+.cooking-time-section {
+  display: flex;
+  align-items: center;
+  margin-right: 90px;
+}
+
+/* 인풋 스타일 기존 인풋과 유사하게 */
+.styled-input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 90px;
+}
+
+.category-select {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* 수정하기 페이지 */
+.write-form-edit {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 30px;
+  /* background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border-top: 5px solid #FF8C00; */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.write-form-edit input[type="text"],
+.write-form-edit textarea {
+  width: 90%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.write-form-edit textarea {
+  height: 120px;
+}
+
+.write-form-edit input[type="file"] {
+  font-size: 14px;
+}
+
+.image-preview-grid-edit {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+
+.preview-image-edit-edit {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.write-form-edit button {
+  padding: 10px;
+  font-size: 15px;
+  background-color: #ffc06d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-container-edit {
+  margin-bottom: 10px;
+}
+
+.image-preview-grid-edit-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-wrapper-edit {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-image-edit {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.qustion-content-edit img{
+  margin-left: 60px;
+}
+
+.remove-image-button-edit {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.thumbnail-image-edit {
+  display: flex;
+  flex-direction: column; /* 세로 배치 */
+  align-items: flex-start; /* 왼쪽 정렬 */
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-left: 60px;
+}
+
+.thumbnail-image-edit p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.preview-image-edit {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* 제목 스타일 (왼쪽 정렬) */
+.recipe-info-title-edit {
+  text-align: left;
+  margin-top: 30px;
+  font-size: 1.3rem;
+  margin-left: 60px;
+  font-weight: bold;
+}
+
+/* 파일 업로드 input 왼쪽 정렬 */
+.recipe-text-file-edit {
+  margin-top: 5px;
+  align-self: flex-start;
+  display: block;
+}
+
+.step-input-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* 자식들(버튼 등)을 왼쪽 정렬 */
+  margin-left: 60px;
+}
+
+.step-input-edit textarea{
+  width: 95%;
+}
+
+.recipe-file-delete-edit {
+  margin-top: 5px;
+  background-color: #ffcd9b;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  align-self: flex-start; /* 삭제 버튼을 왼쪽 정렬 */
+}
+
+/* 설명 추가 버튼 */
+/* .add-step-button {
+  background-color: #ffc06d;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  margin-right: 730px;
+  align-self: flex-start;
+} */
+
+
+.write-options-container-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* 반응형 대응 */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 70px;
+}
+
+.write-options-edit {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.write-options-edit label {
+  margin-right: 10px;
+}
+
+.cooking-time-section-edit {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.styled-input-edit {
+  width: 80px;
+  padding: 5px;
+}
+
+/* 난이도 영역 왼쪽 정렬 */
+.difficulty-section-edit {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 라디오 버튼과 텍스트 붙이기 */
+.difficulty-section-edit label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* 요리 시간 인풋 오른쪽 끝 정렬 */
+.cooking-time-section-edit {
+  display: flex;
+  align-items: center;
+  margin-right: 90px;
+}
+
+/* 인풋 스타일 기존 인풋과 유사하게 */
+.styled-input-edit {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  width: 90px;
+}
+
+.category-select-edit {
+  width: 90%;
+  padding: 8px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* 상세보기 */
+.board-detail {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  /* background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  text-align: center;
+}
+
+.center-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 50px;
+  margin-top: 20px;
+}
+
+.board-detail-info {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 30px;
+  display: flex;               /* Flexbox 적용 */
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center;         /* 수직 가운데 정렬 */
+  color : gray;
+}
+
+.info-texts p {
+  font-size: 15px;
+  color: #999;
+  margin: 0;                   /* p 간격 제거 */
+}
+
+.recipe-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.recipe-image-wrapper {
+  width: 60vh;
+  height: 40vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-recipe-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+.recipe-text-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.recipe-info-h3 {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.recipe-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 40px 0;
+}
+
+/* 레시피 설명 제목 */
+.recipe-info-h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+/* 각 레시피 설명 블록 */
+.recipe-step-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 20px 0;
+  margin: 10px 0;
+  gap: 30px;
+}
+
+/* 이미지 영역 */
+.recipe-step-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.step-image {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.step-placeholder {
+  width: 300px;
+  height: 200px;
+  background-color: #f5f5f5;
+  border: 1px dashed #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  color: #888;
+  border-radius: 8px;
+}
+
+/* 텍스트 설명 영역 */
+.recipe-step-text {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.recipe-image-info{
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.save-button {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: black;
+}
+
+
+.like-save-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.left-like {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.right-save {
+  display: flex;
+  align-items: center;
+}
+
+/* 버튼 스타일 예시 (원하는 대로 수정 가능) */
+.like-button, .save-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.save-popup {
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0.9;
+  animation: fadeInOut 2s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  10% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+.Detail-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.left-button {
+  display: flex;
+  gap: 10px;
+}
+
+.back-button {
+  background: #ffc06d;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 8px;
+}
+
+.delete-button {
+  background: red;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 8px;
+  margin-left: 10px;
+}
+
+.round-button{
+  margin-bottom: 10px;
+}
+
+.round-button button{
+  border-radius: 20px;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.detail-image {
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 1rem auto;
+  display: block;
+}
+
+/* 이미지 크기를 동일하게 맞추고 싶다면 height도 고정하세요 */
+.detail-image.fixed-size {
+  width: 80%;
+  max-width: 400px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.detail-image {
+  max-width: 60vh;
+  max-height: 40vh;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.board-recipe-share-detail-etc{
+  font-size: 15px;
+  color: #777;
+}
+
+.board-detail-content{
+  font-size: 22px;
+}
+.zero{
+  height: 40vh;
+}
+
+/* 인기 게시판 */
+.top-liked-container{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid #ffc06d;
+}
+
+/* 추천 게시판 */
+.main-content{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+}
+
