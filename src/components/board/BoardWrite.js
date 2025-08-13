@@ -13,22 +13,55 @@ const BoardWrite = () => {
   const [category, setCategory] = useState('');
   const [mainImage, setMainImage] = useState(null);
   const [steps, setSteps] = useState([{ text: '', image: null }]);
-  
 
-  const email = sessionStorage.getItem('email')
-
+  const email = sessionStorage.getItem('email');
   const { boardList, setBoardList } = useContext(BoardContext);
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const springBackendUrl = process.env.REACT_APP_SPRING_BACKEND_URL
+  const springBackendUrl = process.env.REACT_APP_SPRING_BACKEND_URL;
+
+  // 이미지 리사이즈 함수
+  const resizeImage = (file, maxWidth, maxHeight, callback) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        let width = img.width;
+        let height = img.height;
+
+        // 비율 유지하며 리사이즈
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+
+        // Canvas로 축소
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // JPEG로 압축, 0.7 품질
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+        callback(dataUrl);
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleMainImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onloadend = () => setMainImage({ file, url: reader.result });
-    reader.readAsDataURL(file);
+    resizeImage(file, 800, 800, (resizedDataUrl) => {
+      setMainImage({ file, url: resizedDataUrl });
+    });
   };
 
   const handleStepChange = (index, field, value) => {
@@ -38,11 +71,10 @@ const BoardWrite = () => {
   };
 
   const handleStepImageChange = (index, file) => {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      handleStepChange(index, "image", { file, url: reader.result });
-    };
-    reader.readAsDataURL(file);
+    if (!file) return;
+    resizeImage(file, 800, 800, (resizedDataUrl) => {
+      handleStepChange(index, "image", { file, url: resizedDataUrl });
+    });
   };
 
   const handleAddStep = () => {
@@ -70,7 +102,6 @@ const BoardWrite = () => {
       }
     }
 
-    // ✅ 로그인 정보에서 email과 nickName 가져오기
     const email = sessionStorage.getItem("email");
     const nickName = sessionStorage.getItem("nickName");
 
@@ -94,8 +125,8 @@ const BoardWrite = () => {
       writingTime: new Date().toLocaleString(),
       likeCount: 0,
       isLiked: false,
-      email,      // ✅ 추가
-      nickName    // ✅ 추가
+      email,
+      nickName
     };
 
     try {
@@ -105,9 +136,11 @@ const BoardWrite = () => {
         return;
       }
 
-      const response = await axios.post("http://springboot-developer-team-ai-env.eba-qnmitp3d.ap-northeast-2.elasticbeanstalk.com/api/board", newPost, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await axios.post(
+        `${springBackendUrl}/api/board`,
+        newPost,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
       const savedPost = response.data;
       setBoardList([savedPost, ...boardList]);
@@ -228,7 +261,8 @@ const BoardWrite = () => {
           <textarea
             placeholder="내용을 입력하세요"
             value={content}
-            onChange={(e) => setContent(e.target.value)} />
+            onChange={(e) => setContent(e.target.value)}
+          />
           <input type="file" accept="image/*" onChange={handleMainImageChange} />
           {mainImage && <img src={mainImage.url} alt="대표 이미지" className="preview-image" />}
         </div>

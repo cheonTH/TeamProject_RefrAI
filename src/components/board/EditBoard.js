@@ -15,11 +15,44 @@ const BoardEdit = () => {
     const [mainImage, setMainImage] = useState(null);
     const [steps, setSteps] = useState([{ text: '', image: null }]);
 
-    const springBackendUrl = process.env.REACT_APP_SPRING_BACKEND_URL
+    const springBackendUrl = process.env.REACT_APP_SPRING_BACKEND_URL;
 
     const { boardList, setBoardList } = useContext(BoardContext);
     const navigate = useNavigate();
     const { id } = useParams();
+
+    // 이미지 리사이즈 함수
+    const resizeImage = (file, maxWidth, maxHeight, callback) => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                let width = img.width;
+                let height = img.height;
+
+                // 비율 유지하며 크기 조정
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+
+                const canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0, width, height);
+
+                const dataUrl = canvas.toDataURL("image/jpeg", 0.7); // JPEG 품질 70%
+                callback(dataUrl);
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    };
 
     useEffect(() => {
         axios.get(`${springBackendUrl}/api/board/${id}`)
@@ -53,9 +86,9 @@ const BoardEdit = () => {
     const handleMainImageChange = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-        const reader = new FileReader();
-        reader.onloadend = () => setMainImage({ file, url: reader.result });
-        reader.readAsDataURL(file);
+        resizeImage(file, 800, 800, (resizedDataUrl) => {
+            setMainImage({ file, url: resizedDataUrl });
+        });
     };
 
     const handleStepChange = (index, field, value) => {
@@ -65,11 +98,10 @@ const BoardEdit = () => {
     };
 
     const handleStepImageChange = (index, file) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            handleStepChange(index, "image", { file, url: reader.result });
-        };
-        reader.readAsDataURL(file);
+        if (!file) return;
+        resizeImage(file, 800, 800, (resizedDataUrl) => {
+            handleStepChange(index, "image", { file, url: resizedDataUrl });
+        });
     };
 
     const handleAddStep = () => {
@@ -85,7 +117,7 @@ const BoardEdit = () => {
     };
 
     const handleSubmit = async () => {
-        const nickName = sessionStorage.getItem("nickname"); // ✅ 닉네임 불러오기
+        const nickName = sessionStorage.getItem("nickname");
 
         const updatedPost = {
             title,
@@ -101,7 +133,7 @@ const BoardEdit = () => {
                 imageUrl: step.image?.url || null
             })),
             writingTime: new Date().toLocaleString(),
-            nickName // ✅ 추가
+            nickName
         };
 
         try {
@@ -149,70 +181,70 @@ const BoardEdit = () => {
             {category !== '질문' && (
                 <>
                     <textarea
-                    placeholder="재료를 입력해주세요 (예: 감자 2개, 당근 1개)"
-                    value={ingredients}
-                    onChange={(e) => setIngredients(e.target.value)}
+                        placeholder="재료를 입력해주세요 (예: 감자 2개, 당근 1개)"
+                        value={ingredients}
+                        onChange={(e) => setIngredients(e.target.value)}
                     />
 
                     <div className="thumbnail-image-edit">
-                    <p>대표 이미지 업로드</p>
-                    <input type="file" accept="image/*" onChange={handleMainImageChange} />
-                    {mainImage && <img src={mainImage.url} alt="대표 이미지" className="preview-image-edit" />}
+                        <p>대표 이미지 업로드</p>
+                        <input type="file" accept="image/*" onChange={handleMainImageChange} />
+                        {mainImage && <img src={mainImage.url} alt="대표 이미지" className="preview-image-edit" />}
                     </div>
 
                     <div className="write-options-container-edit">
-                    <div className="write-options-edit">
-                        <label>난이도:</label>
-                        {['상', '중', '하'].map(level => (
-                        <label key={level}>
-                            <input
-                            type="radio"
-                            name="difficulty"
-                            value={level}
-                            checked={difficulty === level}
-                            onChange={(e) => setDifficulty(e.target.value)}
-                            />
-                            {level}
-                        </label>
-                        ))}
-                    </div>
+                        <div className="write-options-edit">
+                            <label>난이도:</label>
+                            {['상', '중', '하'].map(level => (
+                                <label key={level}>
+                                    <input
+                                        type="radio"
+                                        name="difficulty"
+                                        value={level}
+                                        checked={difficulty === level}
+                                        onChange={(e) => setDifficulty(e.target.value)}
+                                    />
+                                    {level}
+                                </label>
+                            ))}
+                        </div>
 
-                    <div className="cooking-time-section-edit">
-                        <input
-                        type="number"
-                        placeholder="시간(분)"
-                        value={cookingTime}
-                        onChange={(e) => setCookingTime(e.target.value)}
-                        min="5"
-                        className="styled-input-edit"
-                        />
-                        <p>분</p>
-                    </div>
+                        <div className="cooking-time-section-edit">
+                            <input
+                                type="number"
+                                placeholder="시간(분)"
+                                value={cookingTime}
+                                onChange={(e) => setCookingTime(e.target.value)}
+                                min="5"
+                                className="styled-input-edit"
+                            />
+                            <p>분</p>
+                        </div>
                     </div>
 
                     <h2 className="recipe-info-title-edit">레시피 설명</h2>
                     {steps.map((step, index) => (
                         <div key={index} className="step-input-edit">
                             <textarea
-                            placeholder={`Step ${index + 1} 설명`}
-                            value={step.text}
-                            onChange={(e) => handleStepChange(index, "text", e.target.value)}
+                                placeholder={`Step ${index + 1} 설명`}
+                                value={step.text}
+                                onChange={(e) => handleStepChange(index, "text", e.target.value)}
                             />
                             <input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) => handleStepImageChange(index, e.target.files[0])}
-                            className="recipe-text-file-edit"
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => handleStepImageChange(index, e.target.files[0])}
+                                className="recipe-text-file-edit"
                             />
                             {step.image && <img src={step.image.url} alt={`step-${index}`} className="preview-image-edit" />}
                             {index !== 0 && (
-                            <button
-                                type="button"
-                                onClick={() => handleRemoveStep(index)}
-                                className="recipe-file-delete-edit"
-                            >
-                                삭제
-                            </button>
+                                <button
+                                    type="button"
+                                    onClick={() => handleRemoveStep(index)}
+                                    className="recipe-file-delete-edit"
+                                >
+                                    삭제
+                                </button>
                             )}
                         </div>
                     ))}
@@ -223,9 +255,9 @@ const BoardEdit = () => {
             {category === '질문' && (
                 <div className="qustion-content-edit">
                     <textarea
-                    placeholder="내용을 입력하세요"
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                        placeholder="내용을 입력하세요"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
                     />
                     <input type="file" accept="image/*" onChange={handleMainImageChange} />
                     {mainImage && <img src={mainImage.url} alt="대표 이미지" className="preview-image-edit" />}
@@ -237,8 +269,7 @@ const BoardEdit = () => {
                 <button style={{ marginLeft: 10 }} onClick={handleCancel}>취소</button>
             </div>
         </div>
-        );
-
+    );
 };
 
 export default BoardEdit;
